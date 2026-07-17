@@ -357,6 +357,7 @@ class Editor(QMainWindow):
         self.experience = deepcopy(self.data.get("experience", []))
         self.publications = deepcopy(self.data.get("publications", []))
         self.awards = deepcopy(self.data.get("awards", []))
+        self.productdocs = deepcopy(self.data.get("productDocs", []))
 
         self._build_toolbar()
         self.sections = {}   # keep ListSection refs for commit-on-save
@@ -367,6 +368,7 @@ class Editor(QMainWindow):
         tabs.addTab(self._tab_timeline(), "Timeline")
         tabs.addTab(self._tab_experience(), "Experience")
         tabs.addTab(self._tab_projects(), "Projects")
+        tabs.addTab(self._tab_products(), "Products")
         tabs.addTab(self._tab_publications(), "Publications")
         tabs.addTab(self._tab_skills(), "Skills")
         tabs.addTab(self._tab_awards(), "Awards")
@@ -583,6 +585,45 @@ class Editor(QMainWindow):
         self.sections["pr"] = s
         return s
 
+    # ------------------------------------------------------------ tab: products
+    def _tab_products(self):
+        def build(d):
+            form = QFormLayout(d)
+            self.pd_title = QLineEdit()
+            self.pd_sub = QPlainTextEdit(); self.pd_sub.setMaximumHeight(80)
+            self.pd_file = QLineEdit(); self.pd_file.setPlaceholderText("assets/your-file.pdf")
+            pick = QPushButton("Choose PDF…"); pick.clicked.connect(self._pick_product_pdf)
+            frow = QHBoxLayout(); frow.addWidget(self.pd_file); frow.addWidget(pick)
+            fw = QWidget(); fw.setLayout(frow)
+            self.pd_title.textChanged.connect(lambda: self.sections["pd"].commit())
+            self.pd_sub.textChanged.connect(lambda: self.sections["pd"].commit())
+            self.pd_file.textChanged.connect(lambda: self.sections["pd"].commit())
+            form.addRow("Product name", self.pd_title)
+            form.addRow("Subtitle", self.pd_sub)
+            form.addRow("PDF file", fw)
+            note = QLabel("The PDF shows as a scrollable embedded preview with View / Download buttons.")
+            note.setStyleSheet("color:#888;")
+            form.addRow("", note)
+
+        def load(e):
+            self.pd_title.setText(e.get("title", "")); self.pd_sub.setPlainText(e.get("subtitle", ""))
+            self.pd_file.setText(e.get("file", ""))
+
+        def commit(e):
+            e["title"] = self.pd_title.text(); e["subtitle"] = self.pd_sub.toPlainText()
+            e["file"] = self.pd_file.text()
+
+        s = ListSection(self.productdocs, lambda e: e.get("title", "Untitled"),
+                        lambda: {"title": "New Product", "subtitle": "", "file": ""},
+                        build, load, commit)
+        self.sections["pd"] = s
+        return s
+
+    def _pick_product_pdf(self):
+        fn, _ = QFileDialog.getOpenFileName(self, "Choose a PDF", HERE, "PDF (*.pdf)")
+        if fn:
+            self.pd_file.setText(copy_into_assets(fn))
+
     # -------------------------------------------------------- tab: publications
     def _tab_publications(self):
         def build(d):
@@ -750,6 +791,7 @@ class Editor(QMainWindow):
         self.data["timeline"] = self.timeline
         self.data["experience"] = self.experience
         self.data["projects"] = self.projects
+        self.data["productDocs"] = self.productdocs
         self.data["publications"] = self.publications
         self.data["skills"] = self.skills
         self.data["awards"] = self.awards

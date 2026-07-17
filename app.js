@@ -312,6 +312,26 @@
     });
   }
 
+  /* ---------- PRODUCTS (PDF docs) ---------- */
+  const pdocs = $("products-docs");
+  (SITE.productDocs || []).forEach((pd) => {
+    if (!filled(pd.file)) return;
+    const item = el("div", "pdoc reveal");
+    const src = pd.file + "#toolbar=0&navpanes=0&view=FitH";
+    item.innerHTML =
+      `<div class="pdoc__frame"><iframe src="${src}" title="${esc(pd.title)}" loading="lazy"></iframe>` +
+        `<a class="pdoc__open" href="${pd.file}" target="_blank" aria-label="Open ${esc(pd.title)}">⛶</a></div>` +
+      `<div class="pdoc__body">` +
+        `<div class="pdoc__title">${esc(pd.title)}</div>` +
+        (filled(pd.subtitle) ? `<div class="pdoc__sub">${esc(pd.subtitle)}</div>` : "") +
+        `<div class="pdoc__actions">` +
+          `<a class="btn btn--primary" href="${pd.file}" target="_blank">View PDF</a>` +
+          `<a class="btn btn--ghost" href="${pd.file}" download>⬇ Download</a>` +
+        `</div>` +
+      `</div>`;
+    pdocs.appendChild(item);
+  });
+
   /* ---------- PUBLICATIONS ---------- */
   const pubs = $("pubs");
   (SITE.publications || []).forEach((pb) => {
@@ -386,6 +406,7 @@
     journey: (SITE.timeline || []).length,
     experience: (SITE.experience || []).length,
     work: (SITE.projects || []).length,
+    products: (SITE.productDocs || []).length,
     publications: (SITE.publications || []).length,
     skills: (SITE.skills || []).length,
     awards: (SITE.awards || []).length,

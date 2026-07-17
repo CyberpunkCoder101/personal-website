@@ -488,5 +488,17 @@
     "text": "Open to research collaborations, edge-AI work, and interesting hard problems.",
     "email": "anishpatil099@gmail.com"
   },
-  "footer": "Anish Patil"
+  "footer": "Anish Patil",
+  "productDocs": [
+    {
+      "title": "Guardian Eye",
+      "subtitle": "Revolutionizing industrial safety with Edge-AI vision — an intelligent safety and automation system.",
+      "file": "assets/guardian-eye.pdf"
+    },
+    {
+      "title": "AeroGuard Sentinel",
+      "subtitle": "Advanced precision airborne EOD disruption platform, by VersaLife Robotics.",
+      "file": "assets/aeroguard-sentinel.pdf"
+    }
+  ]
 }
