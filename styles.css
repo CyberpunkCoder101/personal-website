@@ -344,8 +344,9 @@ a { color: inherit; text-decoration: none; }
 }
 .award:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--shadow); }
 .award__medal { font-size: 34px; }
-.award__logo { width: 72px; height: 72px; margin: 0 auto; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--surface-2); }
-.award__logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.award__logo { margin: -26px -22px 16px; height: 172px; overflow: hidden; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+.award__logo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; cursor: zoom-in; transition: transform .4s; }
+.award:hover .award__logo img { transform: scale(1.05); }
 .award__title { font-family: var(--font-head); font-weight: 600; font-size: 17px; margin-top: 10px; line-height: 1.3; }
 .award__title a:hover { color: var(--accent); }
 .award__meta { color: var(--text-dim); font-size: 13.5px; margin-top: 8px; }
