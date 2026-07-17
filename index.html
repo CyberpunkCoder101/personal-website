@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anish Patil</title>
+  <meta name="description" content="Personal website of Anish Patil." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- scroll progress bar -->
+  <div class="progress" id="progress"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand" id="navBrand">AP</a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#about" data-sec="about">About</a>
+      <a href="#journey" data-sec="journey">Journey</a>
+      <a href="#experience" data-sec="experience">Experience</a>
+      <a href="#work" data-sec="work">Work</a>
+      <a href="#publications" data-sec="publications">Publications</a>
+      <a href="#skills" data-sec="skills">Skills</a>
+      <a href="#awards" data-sec="awards">Awards</a>
+      <a href="#contact" data-sec="contact">Contact</a>
+    </nav>
+    <div class="nav__controls" id="themeControls"><!-- theme picker injected by app.js --></div>
+    <button class="nav__menu" id="menuBtn" aria-label="Menu">☰</button>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__bg" id="heroBg"></div>
+      <div class="hero__aurora" aria-hidden="true">
+        <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+      </div>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <div class="hero__avatar" id="heroAvatar"></div>
+        <h1 class="hero__name" id="heroName"></h1>
+        <p class="hero__role" id="heroRole"><span id="roleText"></span><span class="cursor">|</span></p>
+        <p class="hero__tagline" id="heroTagline"></p>
+        <p class="hero__location" id="heroLocation"></p>
+        <div class="hero__social" id="heroSocial"></div>
+        <div class="hero__cta" id="heroCta"></div>
+        <div class="hero__stats" id="heroStats"></div>
+      </div>
+      <a href="#about" class="hero__scroll" aria-label="Scroll down">▾</a>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about" data-section>
+      <div class="section__head">
+        <span class="section__kicker" data-label="About"></span>
+        <h2 class="section__title">Hi, I'm <span id="aboutName"></span>.</h2>
+      </div>
+      <p class="about__text" id="aboutText"></p>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section" id="journey" data-section>
+      <div class="section__head">
+        <span class="section__kicker" data-label="Journey"></span>
+        <h2 class="section__title">The road so far</h2>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section" id="experience" data-section>
+      <div class="section__head">
+        <span class="section__kicker" data-label="Experience"></span>
+        <h2 class="section__title">Where I've worked</h2>
+      </div>
+      <div class="exp" id="experience-list"></div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="work" data-section>
+      <div class="section__head">
+        <span class="section__kicker" data-label="Selected Work"></span>
+        <h2 class="section__title">Projects & research</h2>
+      </div>
+      <div class="filterbar" id="projectFilters"></div>
+      <div class="projects" id="projects"></div>
+    </section>
+
+    <!-- Publications -->
+    <section class="section" id="publications" data-section>
+      <div class="section__head">
+        <span class="section__kicker" data-label="Publications"></span>
+        <h2 class="section__title">Papers & writing</h2>
+      </div>
+      <div class="pubs" id="pubs"></div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section" id="skills" data-section>
+      <div class="section__head">
+        <span class="section__kicker" data-label="Toolkit"></span>
+        <h2 class="section__title">Skills & tools</h2>
+      </div>
+      <div class="skills" id="skillsGrid"></div>
+    </section>
+
+    <!-- Awards -->
+    <section class="section" id="awards" data-section>
+      <div class="section__head">
+        <span class="section__kicker" data-label="Recognition"></span>
+        <h2 class="section__title">Awards & certifications</h2>
+      </div>
+      <div class="awards" id="awards-list"></div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact" data-section>
+      <div class="contact__card">
+        <h2 class="contact__heading" id="contactHeading"></h2>
+        <p class="contact__text" id="contactText"></p>
+        <a class="btn btn--primary" id="contactBtn">Get in touch</a>
+        <div class="contact__links" id="contactLinks"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <!-- image lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">×</button>
+    <img id="lightboxImg" alt="" />
+  </div>
+
+  <!-- toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="footer">
+    <span id="footerText"></span>
+    <span class="footer__built">Built with a single editable config file · <a href="README.md">customize me</a></span>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
